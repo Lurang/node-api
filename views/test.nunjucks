@@ -1,0 +1,23 @@
+{% extends "layout.nunjucks" %}
+
+{% block body %}
+    <script>
+    $(document).ready(() => {
+        fetch('http://localhost:3000/api/getUser')
+        .then(res => res.json())
+        .then((resData) => {
+            let content ='';
+            resData.posts.forEach( element => {
+            content+= `<li>id="${element.c_id}" , name="${element.c_name}"</li>`
+            })
+            console.log(content);
+            $("#list").append(content);
+        })
+        .catch(err=>console.log(err));
+        })
+    </script>
+
+  <ul id="list">
+  </ul>  
+{% endblock %}
+

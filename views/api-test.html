@@ -1,0 +1,47 @@
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<button id="get"> GetPosts</button>
+<button id="post"> CreatePosts</button>
+<!--
+<script type="text/javascript" src="api-test.js"></script>
+-->
+<ul id="list">
+
+</ul>
+
+<script>
+    const getButton = document.getElementById('get');
+    const postButton = document.getElementById('post');
+    
+    $(document).ready(() => {
+      fetch('http://localhost:3000/api/getUser')
+      .then(res => res.json())
+      .then( (resData) => {
+        let content ='';
+        resData.posts.forEach( element => {
+          content+= `<li>id = ${element.c_id} ,  name = ${element.c_name}</li>`
+        })
+        console.log(content);
+        $("#list").append(content);
+      })
+      .catch(err=>console.log(err));
+    })
+    /*
+    postButton.addEventListener('click', () => {
+      fetch('http://localhost:3000/feed', {
+        method: 'POST',
+        body: JSON.stringify( {
+          title: 'A Post',
+          content: 'Created'
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(resData => console.log(resData))
+      .catch(err=>console.log(err));
+    });
+    */
+    
+</script>

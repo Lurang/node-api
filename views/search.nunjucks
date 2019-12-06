@@ -1,0 +1,34 @@
+{% extends "layout.nunjucks" %}
+
+{% block body %}
+    <label for="title">Name</label>
+    <input type="text" name="id" id="id">
+    <button id="search">Search User</button>
+
+    <script>
+        const searchButton = document.getElementById("search");
+        
+        searchButton.addEventListener('click', () => {
+            const id = document.getElementById("id").value;
+            fetch(`http://localhost:3000/api/searchUser/${id}`, {method: 'POST'})
+            .then(res => res.json())
+            .then((resData) => {
+                let content = '';
+                if(!resData.message){
+                    const element = resData.user[0];
+                    content += `id = ${element.c_id} , name = ${element.c_name}`;
+                    document.getElementById("list").innerHTML = content;
+                } else {
+                    content += resData.message;
+                    document.getElementById("list").innerHTML = content;
+                }
+            })
+            .catch(err => console.log(err));
+        })
+    </script>
+
+    <ul>
+        <p id="list"></p>
+    </ul>
+
+{% endblock %}

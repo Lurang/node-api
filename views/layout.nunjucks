@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block css %}
+        {% endblock %}
+        <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+        <ul>
+            <li><a href="/feed">Menu1 show users</a></li>
+            <li><a href="/">Menu2 add user</a></li>
+            <li><a href="/search">Menu3 search user</a></li>
+        </ul>
+
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+
+        <div class="footer">
+
+            Copy right xxx 2019.
+        </div>
+    </body>
+</html>
