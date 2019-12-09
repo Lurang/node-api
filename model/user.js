@@ -11,14 +11,8 @@ module.exports = class User {
     
     toHash() {
         return new Promise((res, rej) => {
-            try{
-                const hash = argon2.hash(this.password)
-                res(
-                    hash
-                )
-            } catch {
-
-            }
+            const hash = argon2.hash(this.password)
+            res(hash)
         })
     }
     save() {
@@ -58,7 +52,6 @@ module.exports = class User {
     deleteById() {
         return db.execute(`delete from customer where c_id = ?`, [this.id]);
     }
-
     static verifyPassword(hash, pass) {
         const result = argon2.verify(hash, pass);
         return result;
